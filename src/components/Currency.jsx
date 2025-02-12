@@ -1,6 +1,11 @@
 import React from 'react';
 import '../css/currency.css';
 import { useState } from 'react';
+import axios from 'axios';
+
+let BaseUrl="https://api.freecurrencyapi.com/v1/latest";
+let ApiKey="fca_live_Y6znZqfAADtwhnfCE3FCOJZQeWE5pWabcRH02Spq";
+
 
 function Currency() {
 
@@ -8,6 +13,17 @@ function Currency() {
     const [fromCurrency, setFromCurrency] = useState('USD');
     const [toCurrency, setToCurrency] = useState('TRY');
     const [convertedAmount, setConvertedAmount] = useState(0);
+    
+
+    const exchange = async () => {
+        try {
+            const response = await axios.get(`${BaseUrl}?apikey=${ApiKey}&base_currency=${fromCurrency}&currencies=${toCurrency}`)
+            console.log(response.data.data[toCurrency]);
+            setConvertedAmount(response.data.data[toCurrency] * amount);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
   return <div className='currency-div'>
     <div >
@@ -42,7 +58,9 @@ function Currency() {
      />
     </div>
     <div>
-        <button style={{marginTop: '10px',width:'100px',height:'30px',borderRadius:'5px',border:'none',backgroundColor:'#000',color:'#fff',cursor:'pointer'}}> Çevir</button>
+        <button style={{marginTop: '10px',width:'100px',height:'30px',borderRadius:'5px',border:'none',backgroundColor:'#000',color:'#fff',cursor:'pointer'}}
+        onClick={(exchange)}
+        > Çevir</button>
     </div>
   </div>
 };
