@@ -1,0 +1,14 @@
+# React projesi olarak işaretle
+*.js linguist-detectable=true
+*.jsx linguist-detectable=true
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true
+*.css linguist-detectable=false
+*.scss linguist-detectable=false
+*.html linguist-detectable=false
+
+# JavaScript/JSX dosyalarını React olarak tanımla
+*.js linguist-language=React
+*.jsx linguist-language=React
+*.ts linguist-language=React
+*.tsx linguist-language=React 
